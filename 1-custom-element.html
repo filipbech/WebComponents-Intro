@@ -1,0 +1,47 @@
+<html>
+<head>
+</head>
+<body>
+
+<script>
+
+	/* Feature detection */
+	if('registerElement' in document) {
+
+		/* Creating the prototype */
+		var MyElePro = Object.create(HTMLElement.prototype);
+
+		MyElePro.createdCallback = function() {
+			console.log('created');
+		};
+		MyElePro.attachedCallback = function() {
+			console.log('attached');
+		};
+		MyElePro.detachedCallback = function() {
+			console.log('detached');
+		};
+		MyElePro.attributeChangedCallback = function(attr,oldValue, newValue) {
+			console.log('changed', attr, oldValue,newValue);
+		};
+
+		/* Registering the new element */
+		document.registerElement('my-ele',{
+			prototype:MyElePro
+		});
+
+
+		/* Using the custom element - take a look in the console to see the callbacks being run */
+		var ele = document.createElement('my-ele');
+
+		document.body.appendChild(ele);
+
+		ele.setAttribute('foo','bar');
+
+		document.body.removeChild(ele);
+
+	}
+
+</script>
+
+</body>
+</html>

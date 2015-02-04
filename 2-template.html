@@ -1,0 +1,31 @@
+<html>
+<body>
+	<h1>Outside template</h1>
+
+	<template id="my-template">
+		<h1>Inside template</h1>
+		<script>
+			alert('wwooo');
+		</script>
+		<style>
+			h1 {
+				color:blue;
+			}
+		</style>
+	</template>
+
+	<script>
+		/* feature detection */
+		if('content' in document.createElement('template')) {
+			var template = document.getElementById('my-template');
+			var clone = template.content.cloneNode(true);
+
+			/* appending the template clone after two seconds */
+			setTimeout(function() {
+				document.body.appendChild(clone);
+			},2000);
+		}
+	</script>
+
+</body>
+</html>

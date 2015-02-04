@@ -1,0 +1,53 @@
+<html>
+<body>
+	<h1>Outside</h1>
+	<style>
+		/* Regular styling only applies outside shadow DOM */
+		h1 {
+			text-decoration:underline;
+		}
+
+		/* Styling into shadow-DOM */
+		div/deep/ h1 {
+			font-weight:normal;
+		}
+	</style>
+
+	<template id="my-template">
+		<style>
+			/* Styling is scoped to the shadow DOM */
+			h1 {
+				color:blue;
+			}
+
+			/* the top-most element you can style from within shadow DOM is the host element */
+			:host {
+				background:red;
+			}
+		</style>
+		<h1>Inside shadow DOM</h1>
+		<script>
+			/* Ugly but possible... */
+			var outsideHiFromInside = document.currentScript.parentNode.host.parentNode.querySelector('h1');
+		</script>
+	</template>
+
+	<script>
+		var template = document.getElementById('my-template');
+		var clone = template.content.cloneNode(true);
+
+		/* Create host and shadow */
+		var host = document.createElement('div');
+		var shadow = host.createShadowRoot();
+
+		/* Append to the DOM */
+		shadow.appendChild(clone);
+		document.body.appendChild(host);
+
+		/* If you really want to target stuff inside the shadow DOM */
+		var insideH1FromOutside = document.querySelector('div').shadowRoot.querySelector('h1');
+
+	</script>
+
+</body>
+</html>

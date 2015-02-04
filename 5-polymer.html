@@ -1,0 +1,57 @@
+<!doctype html>
+<html>
+<head>
+
+</head>
+<body>
+<link rel="import" href="polymer/polymer.html" />
+<polymer-element name="my-conf" attributes="name sink">
+	<template>
+		<style>
+			::host {
+				display:none;
+			}
+		</style>
+	</template>
+	<script>
+		Polymer('my-conf', {
+			ready: function() {
+				var _this=this;
+				setTimeout(function() {
+					_this.sink = {
+						key:'ninja '+_this.name
+					};
+				},2000);
+			}
+		});
+	</script>
+</polymer-element>
+
+<polymer-element name="use-conf" attributes="conf">
+	<template>
+		<content></content>
+		<br/><br/>Secret name is: <strong>{{myObj.key}}</strong>
+		<br/>(name turns up after 2000ms timeout)
+	</template>
+	<script>
+		Polymer('use-conf', {
+			observe:{
+				'conf':'update'
+			},
+			update: function() {
+				this.myObj = this.conf;
+			}
+		});
+	</script>
+</polymer-element>
+
+<template is="auto-binding">
+	<my-conf name="Filip" sink="{{confObj}}">Content not visible</my-conf>
+	<use-conf conf="{{confObj}}">This content is visible through the content-tag</use-conf>
+</template>
+
+
+
+</body>
+<html>
+

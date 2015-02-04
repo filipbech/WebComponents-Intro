@@ -1,0 +1,24 @@
+<html>
+<body>
+	<template id="my-template">
+		<h1>Imported template</h1>
+
+		<style>
+			h1 {
+				color:Blue;
+			}
+		</style>
+	</template>
+
+	<script>
+		/* document is the root document, so use document.currentScripts.ownerDocument to acces imported document */
+
+		var template = document.currentScript.ownerDocument.getElementById('my-template');
+		var clone = template.content.cloneNode(true);
+
+		document.body.appendChild(clone);
+
+	</script>
+
+</body>
+</html>
