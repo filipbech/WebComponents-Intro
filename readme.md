@@ -1,5 +1,5 @@
 #Intro to Webcomponents and Polymer
-Notes from a talk at AarhusJS, february 2015, by [Filip Bruun Bech-Larsen](http://twitter.com/filipbech)
+Notes from a talk at AarhusJS, february 2015, by [Filip Bruun Bech-Larsen](http://twitter.com/filipbech) ([blog](https://filipbech.github.io))
 
 The code-samles in this repository demonstrates the 4 specs of webcomponents (custom-elements, templates, HTML-imports and Shadow-DOM) and some basic polymer-usage...
 A couple of links to start using Webcomponents and polymer today.
